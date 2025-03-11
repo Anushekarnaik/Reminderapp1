@@ -2,6 +2,7 @@ interface Reminder {
     id: string;
     title: string;
     date: Date;
+    completed: boolean;
 }
 
 export class ReminderDatabase {
@@ -9,7 +10,7 @@ export class ReminderDatabase {
 
     // Create a new reminder
     createReminder(id: string, title: string, date: Date): void {
-        const reminder: Reminder = { id, title, date };
+        const reminder: Reminder = { id, title, date,completed:false };
         this.reminders.set(id, reminder);
     }
 
@@ -21,13 +22,17 @@ export class ReminderDatabase {
         if (!this.reminders.has(id)) {
             throw new Error('Reminder not found');
         }
-        this.reminders.get(id)!.date = new Date();
+        const reminder = this.reminders.get(id)!;
+        reminder.completed = true;
+        this.reminders.set(id, reminder);
     }
     unmarkReminderAsCompleted(id: string): void {
         if (!this.reminders.has(id)) {
             throw new Error('Reminder not found');
         }
-        this.reminders.get(id)!.date = new Date('2025-03-15');
+        const reminder = this.reminders.get(id)!;
+        reminder.completed = false;
+        this.reminders.set(id, reminder);
     }
     // Get all reminders
     getAllReminders(): Reminder[] {
@@ -59,7 +64,7 @@ export class ReminderDatabase {
         if (!this.reminders.has(id)) {
             return false;
         }
-        const reminder: Reminder = { id, title, date };
+        const reminder: Reminder = { id, title, date,completed:false };
         this.reminders.set(id, reminder);
         return true;
     }
