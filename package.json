@@ -1,0 +1,15 @@
+{
+  "name": "reminderapp",
+  "version": "0.0.0",
+  "description": "We are going to do Reminder App",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx ts-node src/index.ts"
+  },
+  "author": "Anushekarnaik",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
+  }
+}
